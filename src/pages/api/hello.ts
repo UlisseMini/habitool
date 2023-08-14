@@ -36,10 +36,10 @@ export default async function handler(
     };
     const options = { upsert: true, returnOriginal: false };
 
-    const result = await collection.findOneAndUpdate(query, updateDocument, options);
+    const result = await collection.findOneAndUpdate(query as any, updateDocument, options);
 
     if (result.ok) {
-      res.status(200).json({ newCount: result.value.counter });
+      res.status(200).json({ newCount: result.value?.counter });
     } else {
       res.status(500).json({ message: 'Failed to update counter' });
     }
